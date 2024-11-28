@@ -1,0 +1,47 @@
+<!-- offcanvas -->
+<div class="offcanvas offcanvas-start sidebar-nav bg-dark" tabindex="-1" id="sidebar">
+    <div class="offcanvas-body p-0">
+        <nav class="navbar-dark">
+            <ul class="navbar-nav">
+                <li>
+                    <div class="text-muted small fw-bold text-uppercase px-3">
+                        CORE
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="nav-link px-3 active">
+                        <span class="me-2"><i class="bi bi-speedometer2"></i></span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="my-4">
+                    <hr class="dropdown-divider bg-light" />
+                </li>
+
+                <!-- Manager Section -->
+
+                {% if user.is_authenticated and user.role == 1 or user.is_superuser %}
+                
+                <!-- Manager Section  -->
+                {% include 'partials/sidebar/manager.html' %}
+
+
+                <!-- Vendeur Section -->
+
+                {% elif user.is_authenticated and user.role == 2 %}
+
+                {% include 'partials/sidebar/vendeur.html' %}
+
+                <!-- Vendeur Section End -->
+
+                <!-- Receiver Section  -->
+
+                {% elif user.is_authenticated and user.role == 4 %}
+                {% include 'partials/sidebar/receiver.html' %}
+                {% endif %}
+                <!-- Receiver Section  -->
+            </ul>
+        </nav>
+    </div>
+</div>
+<!-- offcanvas -->

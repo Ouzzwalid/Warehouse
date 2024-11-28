@@ -1,0 +1,48 @@
+{% extends 'partials/base.html' %}
+
+{% block title %} Inventory {% endblock %}
+
+{% block content %}
+
+<main class="mt-5 pt-3">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Dashboard</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="table-responsive">
+              <table id="example" class="table table-striped data-table" style="width: 100%">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if products %}
+                  {% for product in products %}
+                  <tr>
+                    <td><a href="{% url 'product-detail' product.id %}">
+                        {{product.name}}
+                      </a>
+                    </td>
+                    <td>{% if product.is_disponible %} {{product.quantity}} {% else %} Not Available {% endif %} </td>
+                  </tr>
+                  {% endfor %}
+                  {% endif %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock %}

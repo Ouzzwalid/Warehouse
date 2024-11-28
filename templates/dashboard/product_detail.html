@@ -1,0 +1,57 @@
+{% extends 'partials/base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %} Dashboard - {{product.name}} {% endblock %}
+
+{% block content %}
+<main class="mt-5 pt-3">
+    {% if user.role == 2 %}
+    <div class="container">
+        <div class="row my-5 justify-content-center">
+            <div class="mt-5 col-lg-6 offset-lg-3">
+                <div class="border bg-white p-3">
+                    <h3 class="text-center">Product informations: </h3>
+                    <hr>
+                    <div class="row mt-5 ">
+                        <div class="col-6">
+                            <h4>Product name :</h4>
+                            <h4>Color :</h4>
+                            <h4>Size :</h4>
+                            <h4>Gender  :</h4>
+                            <h4>Quantity</h4>
+                        </div>
+                        <div class="col-6"> 
+                            <p>{{product.name}}</p>                    
+                            <p>{{product.color}}</p>
+                            <p>{{product.size}}</p>
+                            <p>{{product.gender}}</p>
+                            <p>{{product.quantity}}</p>
+                        </div>
+                        
+                    </div>
+                    <div class="row mt-5 justify-content-center ">
+                        <div class="col-12 text-center">
+                            {{product.sku}}
+                        </div>
+                    </div>
+                    <div class="row mt-5 justify-content-center">
+                        {% if product.barcode %}
+                        <div class="col-12">
+                            <img src="{{product.barcode.url}}" class="img-fluid">
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <button id="printButton" class="btn btn-primary hidden-print mt-4" onclick="window.print()"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Print</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+        
+    {% endif %}
+</main>  
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'partials/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Dashboard - Delete order {% endblock %}
+
+{% block content %}
+<main class="mt-5 pt-3">
+    <div class="container-fluid">
+        <div class="row mt-5 justify-content-center">
+            <div class="mt-5 col-md-8 ">
+
+                <div class="border bg-white p-3">
+
+                    <h3>Delete Order</h3>
+                    <hr>
+                    <div class="alert alert-danger" role="alert">
+                        Do you really wabt to delete this order ?
+                    </div>
+                    <form id="delete_form" method="post">
+                        {% csrf_token %}
+
+                        {{form}}
+                        
+                        
+                    </form>
+                    <input form="delete_form" class="btn btn-danger btn-large mt-3 " type="submit" value="Delete ">
+                    <button class="btn btn-secondary btn-large mt-3 " onclick=history.back()>Cancel</button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'partials/base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %} Dashboard {% endblock %}
+
+{% block content %}
+<main class="mt-5 pt-3">
+    {% if user.role == 1 or user.is_superuser %}
+    <div class="container">
+        <div class="row my-5 justify-content-center">
+            <div class="mt-5 col-8 ">
+                <div class="border bg-white p-3">
+                    <h3 class="text-center">Order details: {{order}} </h3>
+                    <hr>
+                    {% for item in order_items %}
+                    <div class="row  justify-content-center  ">
+
+                        <div class="col-4">
+
+                            <p> Product : </p>
+                            <p> SKU : </p>
+                            <p>Quantity : </p>
+                            <p>Emplacement : </p>
+
+                            <hr>
+                        </div>
+                        <div class="col-4">
+                            <p> {{item.product}} </p>
+                            <p> {{item.product.sku}} </p>
+                            <p>{{item.quantity}} </p>
+                            <p> {{item.emplacement}} </p>
+                            <hr>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div class="row justify-content-center">
+                        <div class="col">
+                            <form method="post">
+                                {% csrf_token %}
+                                {{form|crispy}}
+                                <button class="btn btn-primary mt-3" type="submit">GO</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    {% endif %}
+</main>
+
+{% endblock %}

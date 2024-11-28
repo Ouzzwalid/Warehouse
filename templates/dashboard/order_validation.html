@@ -1,0 +1,102 @@
+{% extends 'partials/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Dashboard - Order validation {% endblock %}
+
+
+{% block content %}
+
+<main class="mt-5 pt-3">
+    <div class="container-fluid">
+        <div class="row my-5 justify-content-center">
+            <div class="mt-5 col-lg-6 ">
+                <div class="border bg-white p-3">
+                    <h3 class="text-center">Order informations: </h3>
+
+                    {% for item in order_items%}
+                    <hr>
+                    <div class="row mt-2 ">
+                        <div class="col-4">
+                            <p>Product name :</p>
+                            <p>Quantity :</p>
+                            <p>Price : </p>
+
+                        </div>
+                        <div class="col-4">
+                            <p>{{item.product}}</p>
+                            <p>{{item.quantity}}</p>
+                            <p>{{item.item_price}}</p>
+
+                        </div>
+                        <div class="col-4">
+                            <a class="btn btn-primary  w-75 mt-3"
+                                href="{% url 'order-edit' order.id item.product.id %} "> Edit </a>
+                            <a class="btn btn-danger  w-75 mt-3" href="{% url 'order-item-delete' order.id item.product.id %}"> Delete </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                    <div class="text-center my-3">
+                        <a href="{% url 'order-add-product' order.id %} " class="btn btn-outline-primary  ">add product</a>
+                    </div>
+                
+            </div>
+            <div class="mt-5 col-lg-6 ">
+                <div class="border bg-white p-3">
+                    <h3 class="text-center">Customer informations: </h3>
+                    <hr>
+
+
+                    <div class="row mt-2 ">
+                        <div class="col-4">
+                            <p>Full name :</p>
+                            <p>Address :</p>
+                            <p>Phone :</p>
+                            <p>City :</p>
+                        </div>
+                        <div class="col-4">
+                            <p>{{order.customer.full_name}}</p>
+                            <p>{{order.customer.address}}</p>
+                            <p>{{order.customer.phone}}</p>
+                            <p>{{order.customer.city}}</p>
+                        </div>
+
+                        <div class="row  justify-content-center">
+                            <a href="#" class="btn btn-primary  w-75 mt-3 ">Edit Customer</a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+        <div class="row mt-2 justify-content-center alert alert-secondary ">
+            <div class="col-2 col-lg-4 col-md-4 col-sm-4 ">
+                <p>Fees :</p>
+                <p>Order amount :</p>
+                <p>Total : </p>
+
+            </div>
+            <div class="col-2 col-lg-4 col-md-4 col-sm-4 ">
+                <p>{{order.order_fees}}</p>
+                <p>{{order.order_amount}}</p>
+                <p>{{order.total}}</p>
+
+            </div>
+
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+            {{form}}
+            <div class="row mt-5 justify-content-center">
+                <input class="btn btn-primary  w-75 mt-3 " type="submit" value="Confirm Order ">
+                <a class="btn btn-danger  w-75 mt-3" href="{% url 'order-delete' order.id %}"> Delete Order </a>
+            </div>
+        </form>
+    </div>
+    </div>
+</main>
+
+{% endblock %}

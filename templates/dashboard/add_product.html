@@ -1,0 +1,24 @@
+{% extends 'partials/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Dashboard - Add product {% endblock %}
+
+{% block content %}
+<main class="mt-5 pt-3">
+    <div class="container-fluid">
+        <div class="row mt-5 justify-content-center">
+            <div class="mt-5 col-md-8 ">
+                <div class="border bg-white p-3">
+                    <h3>Add product Page</h3>
+                    <hr>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{form|crispy}}
+                        <input class="btn btn-success mt-3" type="submit" value="Add">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

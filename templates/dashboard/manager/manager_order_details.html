@@ -1,0 +1,82 @@
+{% extends 'partials/base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %} Dashboard {% endblock %}
+
+{% block content %}
+<main class="mt-5 pt-3">
+    {% if user.role == 1 or user.is_superuser %}
+    <div class="container">
+        <div class="row my-5 ">
+            <h3 class="">Order details: </h3>
+            <div class="mt-5 col-lg-6">
+                <div class="border bg-white p-3">
+                    <h3 class="text-center">Products details: </h3>
+                    <hr>
+                    <div class="row mt-5 ">
+                        <div class="col-6">
+                            <h4>Product name : </h4>
+                            <h4>Quantity : </h4>
+                            <h4>Emplacements : </h4>
+                        </div>
+                        <div class="col-6">
+                            <h4>Product name : </h4>
+                            <h4>Quantity : </h4>
+                            <h4>Emplacements : </h4>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="row mt-5 justify-content-center ">
+                        <div class="col-12 text-center">
+                        </div>
+                    </div>
+
+
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <button id="printButton" class="btn btn-primary hidden-print mt-4"
+                            onclick="window.print()"><span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+                            Print</button>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-5 col-lg-6">
+                <div class="border bg-white p-3">
+                    <h3 class="text-center">Customer details: </h3>
+                    <hr>
+                    <div class="row mt-5 ">
+                        <div class="col-6">
+                            <h4>Full name : </h4>
+                            <h4>Address : </h4>
+                            <h4>Phone : </h4>
+                            <h4>City : </h4>
+                        </div>
+                        <div class="col-6">
+                            <h4>Product name : </h4>
+                            <h4>Quantity : </h4>
+                            <h4>Emplacements : </h4>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="row mt-5 justify-content-center ">
+                        <div class="col-12 text-center">
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+        </div>
+        <form action="" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Go">
+
+        </form>
+    </div>
+
+
+    {% endif %}
+</main>
+{% endblock %}

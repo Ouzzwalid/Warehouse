@@ -1,0 +1,46 @@
+{% extends 'partials/base.html' %}
+{% block title %} Barcodes {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-5 justify-content-center">
+        <div class="mt-5 col-lg-4 offset-lg-3">
+            <div class="border bg-white p-3">
+                <button class="btn btn-primary gap-2" onclick="printContent('barcode')">Print BarCodes</button>
+                <hr>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row mt-5 justify-content-center offset-lg-3" id="barcode">            
+                     
+                                 
+            {% with ''|center:product.stored_items as range %}
+                {% for _ in range %}
+                <div class="m-3 col-lg-3 img-barcode">
+                    <img src="{{product.barcode.url}}" class="img-fluid ">
+                    <p class="text-center">{{product.emplacement.address}}</p>
+                </div>
+                {% endfor %}
+            {% endwith %}
+       
+         
+           
+            
+                   
+               
+                  
+      
+        </div>
+    </div>
+
+    <script>
+        function printContent(el) {
+            var restorepage = document.body.innerHTML;
+            var printcontent = document.getElementById(el).innerHTML;
+            document.body.innerHTML = printcontent;
+            window.print();
+            document.body.innerHTML = restorepage;
+        }
+    </script>
+    {% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'partials/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Dashboard - {{product.name}} {% endblock %}
+
+
+{% block content %}
+<main class="mt-5 pt-3">
+
+    {% if user.role == 4 %}
+    <div class="container-fluid">
+        <div class="row mt-5 ">
+            <div class="mt-5 col-lg-6">
+                <div class="border bg-white p-3">
+                    <h3>Product Validation </h3>
+                    <hr>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{form|crispy}}
+                        <input class="btn btn-success mt-3" type="submit" value="Validate">
+                    </form>
+                    {% if product.barcode %}
+                    <div class="mt-5 col-lg-12" id="barcode">
+                        <img src="{{product.barcode.url}}" class="img-fluid">
+                    </div>
+
+                    {% endif %}
+                </div>
+            </div>
+            <div class="mt-5 col-lg-6">
+                <div class="border bg-white p-3">
+                    <h3>Vendeur informations </h3>
+                    <hr>
+                    <div class="row mt-3">
+                        <div class="col"> Nom : </div>
+                        <div class="col">{{product.vendeur.username}}</div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col"> Email : </div>
+                        <div class="col">{{product.vendeur.email}}</div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col"> Phone : </div>
+                        <div class="col">{{product.vendeur.phone}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {% endif %}
+</main>
+{% endblock %}

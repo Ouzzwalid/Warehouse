@@ -1,0 +1,55 @@
+{% extends 'partials/base.html' %}
+
+{% block title %} Emplacements {% endblock %}
+
+{% block content %}
+
+<main class="mt-5 pt-3">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Emplacements</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table
+                  id="example"
+                  class="table table-striped data-table"
+                  style="width: 100%"
+                >
+                  <thead>
+                    <tr>
+                      <th>Address</th>
+                      <th>Alley </th>
+                      <th>Row</th>
+                      <th>Column</th>
+                      <th>Volume dispo</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% if emplacements %}
+                    {% for emplacement in emplacements %}   
+                        <tr>
+                            <td> <a href="{% url 'dashboard-emplacement-details' emplacement.id %}">{{emplacement.address}}</td></a>
+                            <td> {{emplacement.alley}}</td>  
+                            <td> {{emplacement.row}}</td>
+                            <td> {{emplacement.column}}</td>
+                            <td> {{emplacement.volume}}</td>                       
+                        </tr>
+                    {% endfor %}  
+                    {% endif %}  
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</main>
+
+{% endblock %}

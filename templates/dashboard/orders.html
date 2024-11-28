@@ -1,0 +1,70 @@
+{% extends 'partials/base.html' %}
+{% block title %} Dashboard {% endblock %}
+
+{% block content %}
+{% if user.role == 2 %}
+  <main class="mt-5 pt-3">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Dashboard</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 mb-3">
+          <div class="card">
+            <div class="card-body">
+              {% for message in messages%}
+                {% if message %}
+                <div class="alert alert-success">
+                    {{message}}
+                </div>
+                {% endif %}
+                {%endfor%}
+              <div class="table-responsive">
+                <table
+                  id="example"
+                  class="table table-striped data-table"
+                  style="width: 100%"
+                >
+                  <thead>
+                    <tr>
+                      <th>Order N°</th>
+                      <th>Product</th>
+                      <th>Ordred items</th>
+                      <th>Customer</th>
+                      <th>Phone</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for order in orders %}   
+                        <tr>
+                            <td>{{order.id}}</td>
+                            <td><ul style="list-style:none">
+                                {% for product in order.product.all %}
+                                <li >{{product}}</li>
+                                {% endfor %}
+                            </ul></td>
+                            <td><ul style="list-style:none">
+                                {% for orderitem in order.orderitems_set.all %}
+                                <li >{{orderitem.quantity}}</li>
+                                {% endfor %}
+                            </ul></td>  
+                            <td class="align-middle"> {{order.customer}}</td> 
+                            <td class="align-middle"> {{order.customer.phone}}</td> 
+                            <td> {{order.status}} </td>                      
+                        </tr>
+                    {% endfor %}    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  {% endif %}
+
+{% endblock %}

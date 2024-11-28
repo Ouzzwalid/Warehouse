@@ -1,0 +1,55 @@
+{% extends 'partials/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Dashboard - Add order {% endblock %}
+
+{% block content %}
+<main class="mt-5 pt-3">
+    <div class="container-fluid">
+        <div class="row mt-5 justify-content-center">
+            <div class="mt-5 col-md-8 ">
+
+                <div class="border bg-white p-3">
+
+                    {% if disponible_products %}
+                    {% for message in messages%}
+                    {% if message %}
+                    <div class="alert alert-danger">
+                        {{message}}
+                    </div>
+                    {% endif %}
+                    {%endfor%}
+                    <h3>Add order Page</h3>
+                    <hr>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row mt-5 ">
+                            <div class="col">
+                                <h4>Products</h4>
+                                <hr>
+                                {{order_form|crispy}}
+                            </div>
+                            <div class="col">
+                                <h4>Customer</h4>
+                                <hr>
+                                {{customer_form|crispy}}
+                            </div>
+                            <input class="btn btn-success  btn-block mt-3 " type="submit" value="Submit order ">
+                        </div>
+                    </form>
+
+
+
+                    {%else%}
+                    <div class="alert alert-danger" role="alert">
+                        You have no products to order yet !
+                    </div>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

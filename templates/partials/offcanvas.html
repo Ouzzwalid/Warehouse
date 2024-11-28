@@ -1,0 +1,82 @@
+ <!-- offcanvas -->
+ <div class="offcanvas offcanvas-start sidebar-nav bg-dark" tabindex="-1" id="sidebar">
+    <div class="offcanvas-body p-0">
+      <nav class="navbar-dark">
+        <ul class="navbar-nav">
+          <li>
+            <div class="text-muted small fw-bold text-uppercase px-3">
+              CORE
+            </div>
+          </li>
+          <li>
+            <a href="#" class="nav-link px-3 active">
+              <span class="me-2"><i class="bi bi-speedometer2"></i></span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="my-4"><hr class="dropdown-divider bg-light" /></li>
+  
+          <!-- Vendeur Section -->
+      {% if user.is_authenticated and user.role == 2 %}
+          <li>
+            <div class="text-muted small fw-bold text-uppercase px-3 mb-3">
+              Interface
+            </div>
+          </li>
+          <li>
+            <a class="nav-link px-3 sidebar-link" data-bs-toggle="collapse" href="#layouts">
+              <span class="me-2"><i class="bi bi-layout-split"></i></span>
+              <span>Products</span>
+              <span class="ms-auto">
+                <span class="right-icon">
+                  <i class="bi bi-chevron-down"></i>
+                </span>
+              </span>
+            </a>
+            <div class="collapse" id="layouts">
+              <ul class="navbar-nav ps-3">
+                <li>
+                  <a href="{% url 'dashboard-add-product' %}" class="nav-link px-3"><span class="me-2"><i class="bi bi-speedometer2"></i></span><span> Add product </span></a>
+                </li>
+                <li>
+                  <a href="{% url 'dashboard-inventory' %}" class="nav-link px-3">
+                    <span class="me-2"
+                      ><i class="bi bi-speedometer2"></i
+                    ></span>
+                    <span>Inventory</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a href="#" class="nav-link px-3">
+              <span class="me-2"><i class="bi bi-book-fill"></i></span>
+              <span>Orders</span>
+            </a>
+          </li>
+      {% endif %}
+      <!-- Vendeur Section End -->
+          <li class="my-4"><hr class="dropdown-divider bg-light" /></li>
+          <li>
+            <div class="text-muted small fw-bold text-uppercase px-3 mb-3">
+              Addons
+            </div>
+          </li>
+          <li>
+            <a href="#" class="nav-link px-3">
+              <span class="me-2"><i class="bi bi-graph-up"></i></span>
+              <span>Vendeurs</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link px-3">
+              <span class="me-2"><i class="bi bi-table"></i></span>
+              <span>Staff</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <!-- offcanvas -->

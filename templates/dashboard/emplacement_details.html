@@ -1,0 +1,51 @@
+{% extends 'partials/base.html' %}
+
+{% block title %} {{emplacement}} {% endblock %}
+
+{% block content %}
+<main class="mt-5 pt-3">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Emplacement: {{emplacement.address}}</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table
+                  id="example"
+                  class="table table-striped data-table"
+                  style="width: 100%"
+                >
+                  <thead>
+                    <tr>
+                      <th>Products</th>
+                      <th>Stored items</th>
+                      <th>Available volume</th>
+                    
+                    </tr>
+                  </thead>
+                  <tbody>
+                   
+                    {% for product in emplacement.product_set.all %}   
+                        <tr>
+                            <td> {{product}}</td>
+                            <td> {{product.stored_items}}</td>
+                            <td>{{emplacement.volume}} cm³</td>
+                                                 
+                        </tr>
+                    {% endfor %}  
+                     
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</main>
+{% endblock %}
